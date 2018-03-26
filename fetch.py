@@ -35,4 +35,34 @@ def is_dirak_graph (graph):
         return False
     return True
 
+def hamilton_cycle (graph):
+    startVertex = list(nx.nodes(graph))[0]  #стартовая вершина
+    N = list()                              #список вершин смежных с текущей вершиной
+                                            #ребро между которыми еще не рассматривалось
+    cycle = list()                          #текущий список вершин в цикле
+    cycle.append(startVertex)
+
+    for line in nx.generate_adjlist(graph): #генерирум список смежных вершин
+        N.append(list(line.replace(' ','')))
+
+    while (len(cycle)!=0):
+        x = cycle.pop()                     #
+        cycle.append(x)                     # top()
+        if (len(N[x])!= 0):
+            y = N[x].pop()
+            if (not(y in cycle)):
+                cycle.append(y)
+                if (len(cycle) == nx.number_of_nodes(graph)):
+                    if(startVertex in N[cycle.pop()]):
+                        return cycle
+                    elif (len(cycle) == nx.number_of_nodes(graph)):
+                        cycle.pop()
+        else:
+            cycle.pop()
+    return False
+
+
+
+
+
 
