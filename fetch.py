@@ -45,6 +45,10 @@ def hamilton_cycle (graph):
     for line in nx.generate_adjlist(graph): #генерирум список смежных вершин
         N.append(list(line.replace(' ','')))
 
+    for elem in N:
+        for i in range(len(elem)):
+            elem[i] = int(elem[i])
+
     while (len(cycle)!=0):
         x = cycle.pop()                     #
         cycle.append(x)                     # top()
